@@ -1,33 +1,45 @@
-const from_currencyEl = document.getElementById("from_currency");
-const from_ammountEl = document.getElementById("from_ammount");
-const to_currencyEl = document.getElementById("to_currency");
-const to_ammountEl = document.getElementById("to_ammount");
-const rateEl = document.getElementById("rate");
-const exchange = document.getElementById("exchange");
 
-from_currencyEl.addEventListener("change", calculate);
-from_ammountEl.addEventListener("input", calculate);
-to_currencyEl.addEventListener("change", calculate);
-to_ammountEl.addEventListener("input", calculate);
+fetch(`https://v6.exchangerate-api.com/v6/9a3f26ddcc70164616bfde61/latest/USD`)
+.then(res => res.json())
+.then((data)=>{
 
-exchange.addEventListener("click", () => {
-  const temp = from_currencyEl.value;
-  from_currencyEl.value = to_currencyEl.value;
-  to_currencyEl.value = temp;
-  calculate();
-});
+    let firstSelect = document.querySelector(".first-select");
+    let secSelect = document.querySelector(".sec-select");
 
-function calculate() {
-  const from_currency = from_currencyEl.value;
-  const to_currency = to_currencyEl.value;
+    console.log(data);
+    let countries = Object.keys(data.conversion_rates)
+    // let currency = Object.values(data.conversion_rates)
 
-  fetch(`https://api.exchangerate-api.com/v4/latest/${from_currency}`)
-    .then((res) => res.json())
-    .then((res) => {
-      const rate = res.rates[to_currency];
-      rateEl.innerText = `1 ${from_currency} = ${rate} ${to_currency}`;
-      to_ammountEl.value = (from_ammountEl.value * rate).toFixed(2);
-    });
-}
+    // console.log(countries);
+    // console.log(currency);
 
-calculate();
+    countries.forEach((country) => {
+        // console.log(country);
+
+        let myCountries = `
+        <option></option> 
+        <option value="${country}">${country}</option>
+        `;
+        // console.log(myCountries);
+
+        firstSelect.innerHTML +=  myCountries;
+        secSelect.innerHTML += myCountries;
+    })
+
+    document.querySelector("#convertInput").addEventListener("click",(z)=>{
+        z.preventDefault();
+
+        let amountInput = document.querySelector("#amountInput").value;
+        let toSelect = secSelect.value;
+       
+        fetch(`https://v6.exchangerate-api.com/v6/9a3f26ddcc70164616bfde61/latest/${firstSelect.value}`)
+        .then(res => res.json())
+        .then((firstOpt) => {
+            // console.log(firstOpt);
+        let rate = firstOpt.conversion_rates[toSelect];
+        result.innerHTML = `${amountInput} ${firstSelect.value} = ${rate} ${toSelect}`;
+        })
+    })
+})
+
+

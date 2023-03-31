@@ -1,0 +1,55 @@
+<body>
+  <div class="container">
+    <h1 class="title"> Currency 💸 Converter</h1>
+    <div class="slider-wrapper">
+      <div class="slider">
+        <div class="sliding active flex-center">
+          <div id="get_curr" class="grid">
+            <p id="msg1" class="msg">Use the suggestion from the list while typing or use all caps to fetch exchange rate from internet</p>
+            <label for="source-currency-unit">Convert :</label>
+            <label for="target-currency-unit">To :</label>
+
+            <input list="currency" type="text" id="source-currency-unit" placeholder="Ex.: USD" required="True" autocomplete="False" autofocus="True"></input>
+            <input list="currency" type="text" id="target-currency-unit" placeholder="Ex.: EUR" required="True" autocomplete="False"></input>
+
+            <button type="button" class="btn exchange_button">
+              <svg role="presentation" class="icon exchange__icon" width=24 height=24>
+                <use xlink:href="#exchange__icon" />
+              </svg>
+            </button>
+
+            <datalist id="currency"></datalist>
+            <button type="button" id="next" class="btn next"><span class="arrow"><span></button>
+          </div>
+        </div>
+        <div class="sliding flex-center">
+          <div id="get_conv" class="grid">
+            <p id="msg2">Converting $1 to $2 </p>
+            <button type="button" class="change btn">Change</button>
+            <div class="grid">
+              <label for="original-currency-amount"> Ammount :</label>
+              <input type="number" id="original-currency-amount" placeholder="1"></input>
+
+              <label for="exchange-rate">Exchange Rate:</label>
+              <input type="number" id="exchange-rate"></input>
+            </div>
+            <button id="convert" class="btn convert">Exchange my money now!</button>
+
+            <p id="output-text">Converted 💰 will appear here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="source" class="source">
+      <p>In the backend <a href="https://exchangeratesapi.io/" target="blank">exchangeratesapi</a> is used for getting supported currencies and the exchange rate</p>
+    </div>
+
+  </div>
+  <svg display="none">
+    <symbol id="exchange__icon" role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+      <path d="M215.793 181.362L275 120.814M274.377 120.814L215.169 60.267M84.2074 118.905L25 179.453M25.6232 179.453L84.8307 240M84.7771 207.368H155.288M85.2178 239.366V207.819M84.3364 150.133V118.587M143.83 91.9974H214.341M215.663 180.779V149.232M214.782 91.5467V60M83.8957 149.683H216.104" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+  </symbol>
+  <script src="index.pack.js"></script>
+  <!-- <script src="index.js"></script> -->
+</body>
